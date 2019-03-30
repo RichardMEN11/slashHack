@@ -6,8 +6,9 @@ include "anti_injection.php";
 $username =anti_injection($_POST['username']); 
 $password =md5($_POST['password']); 
 $name = anti_injection($_POST['name']);
+$supervisor = $_SESSION['admin'];
 
-    $query="INSERT INTO user (username, password, name) VALUES ('$username', '$password', '$name')";
+    $query="INSERT INTO user (username, password, name, supervisor) VALUES ('$username', '$password', '$name','$supervisor')";
     $result=mysqli_query($connection,$query) or die("<script type='text/javascript'>alert('User already existing');</script><meta http-equiv='refresh' content='0;URL=user_register.php'>");
 
     if (!$result){
@@ -19,5 +20,5 @@ $name = anti_injection($_POST['name']);
  }
 
 mysqli_close($connection);
-header("refresh:3;url=user_dashboard.php");   
+header("refresh:3;url=admin_dashboard.php");   
 ?>
